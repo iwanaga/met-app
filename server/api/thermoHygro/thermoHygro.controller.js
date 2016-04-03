@@ -61,7 +61,13 @@ function handleError(res, statusCode) {
 
 // Gets a list of ThermoHygros
 export function index(req, res) {
-  return ThermoHygro.find().exec()
+  var now = new Date();
+  req.y = req.y || now.getFullYear();
+  req.m = req.m - 1 || now.getMonth();
+  req.d = req.d || now.getDate();
+  var startAt = new Date(req.y, req.m, req.d, 0);
+  var endAt   = new Date(req.y, req.m, req.d, 24);
+  return ThermoHygro.find({createAt: {$gte: startAt, lt: endAt}}).exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
