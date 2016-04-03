@@ -6,6 +6,7 @@
 'use strict';
 import Thing from '../api/thing/thing.model';
 import User from '../api/user/user.model';
+import ThermoHygro from '../api/thermoHygro/thermoHygro.model';
 
 Thing.find({}).remove()
   .then(() => {
@@ -57,3 +58,18 @@ User.find({}).remove()
       console.log('finished populating users');
     });
   });
+ThermoHygro.find({}).remove().then(() => {
+  ThermoHygro.create({
+    temperature: 20,
+    humidity: 40,
+    heatIndex: 19
+  }, {
+    temperature: 32,
+    humidity: 60,
+    heatIndex: 37
+  }, {
+    temperature: 30,
+    humidity: 90,
+    heatIndex: 41
+  })
+});
