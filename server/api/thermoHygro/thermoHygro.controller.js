@@ -62,12 +62,12 @@ function handleError(res, statusCode) {
 // Gets a list of ThermoHygros
 export function index(req, res) {
   var now = new Date();
-  req.y = req.y || now.getFullYear();
-  req.m = req.m - 1 || now.getMonth();
-  req.d = req.d || now.getDate();
-  var startAt = new Date(req.y, req.m, req.d, 0);
-  var endAt   = new Date(req.y, req.m, req.d, 24);
-  return ThermoHygro.find({createAt: {$gte: startAt, lt: endAt}}).exec()
+  req.y = req.y    || now.getFullYear();
+  req.m = req.m -1 || now.getMonth();
+  req.d = req.d    || now.getDate();
+  var start = new Date(req.y, req.m, req.d,  0);
+  var end   = new Date(req.y, req.m, req.d, 24);
+  return ThermoHygro.find({createdAt: {$gte: start, $lt: end}}).exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
