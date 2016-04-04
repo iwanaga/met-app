@@ -58,8 +58,8 @@ User.find({}).remove()
       console.log('finished populating users');
     });
   });
-ThermoHygro.find({}).remove().then(() => {
-  ThermoHygro.create({
+
+ThermoHygro.create({
     temperature: 20,
     humidity: 40,
     heatIndex: 19
@@ -71,5 +71,5 @@ ThermoHygro.find({}).remove().then(() => {
     temperature: 30,
     humidity: 90,
     heatIndex: 41
-  })
 });
+
